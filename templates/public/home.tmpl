@@ -1,0 +1,9 @@
+{{ define "header" }}
+{{ template "navbar.tmpl" . }}
+{{ end }}
+{{ define "content" }}
+<h1 class="blue mb-5">Public Home: {{.Title}}</h1>
+<div class="container mx-auto">
+  <img src="/static/img/atle-red.svg" height="400" width="1600" />
+</div>
+{{ end }}

@@ -1,0 +1,50 @@
+<nav class="shadow-lg mb-5">
+  <ul class="flex items-center">
+    <li class="ml-3 mr-6">
+      <img src="/static/img/atle-blue.svg" height="20" width="80">
+    </li>
+    <li class="ml-3 mr-6">
+     {{if eq .Title "Home"}}
+      <a class="text-blue-700 hover:text-blue-800" href="/public/home/">Home</a>
+      {{else}}
+      <a class="text-blue-500 hover:text-blue-800" href="/public/home/">Home</a>
+      {{end}}
+    </li>
+    <li class="mr-6">
+      {{ if eq .Title "Resume" }}
+      <a class="text-blue-700 hover:text-blue-800" href="/public/resume/">Resume/CV</a>
+      {{ else }}
+      <a class="text-blue-500 hover:text-blue-800" href="/public/resume/">Resume/CV</a>
+      {{ end }}
+    </li>
+    <li class="mr-6">
+      {{ if eq .Title "Contact" }}
+      <a class="text-blue-700 hover:text-blue-800" href="/public/contact/">Contact</a>
+      {{ else }}
+      <a class="text-blue-500 hover:text-blue-800" href="/public/contact/">Contact</a>
+      {{ end }}
+    </li>
+    {{ if not .IsAuthenticated }}
+    <li class="mr-6 justify-between mx-auto">
+      {{ if eq .Title "Login" }}
+      <a class="text-blue-700 hover:text-blue-800" href="/auth/login">Login</a>
+      {{ else }}
+      <a class="text-blue-500 hover:text-blue-800" href="/auth/login">Login</a>
+      {{ end }}
+    </li>
+    {{ else }}
+    <li class="mr-6">
+      {{ if eq .Title "Private Home" }}
+      <a class="text-red-700 hover:text-red-800" href="/private/home/">Private Home</a>
+      {{ else }}
+      <a class="text-red-500 hover:text-red-800" href="/private/home/">Private Home</a>
+      {{ end }}
+    </li>
+    <li class="mr-6 justify-between mx-auto">
+      <a class="text-blue-500 hover:text-blue-800" href="/auth/logout">Logout</a>
+    </li>
+    {{
+      end
+    }}
+  </ul>
+</nav>

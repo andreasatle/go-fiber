@@ -1,0 +1,20 @@
+{{ define "header" }}
+{{ template "navbar.tmpl" . }}
+{{ end }}
+{{ define "content" }}
+<h1 class="blue">Software Engineer / Applied Math</h1>
+<h2>Education</h2>
+<ul>
+  <li>2000-2006 PhD Applied Math, Stockholm University</li>
+  <li>1998-2000 MSc Scientific Computing, Royal Inst. of Techn. (KTH)</li>
+  <li>1994-1998 BSc Comp. Science, Stockholm University</li>
+</ul>
+<h2>Experience</h2>
+<li>
+  2022 Aug - 2023 Mar, Software Developer - Spectacle LLC <br />
+  Developed BERT-model with tensorflow, created micro-services, and migrated to
+  AWS EKS, with Kubernetes, using node.js and python. We used gRPC for the APIs.
+  Other services include language translation, and NSFW-classifiers, using
+  existing python packages.
+</li>
+{{ end }}
