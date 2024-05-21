@@ -1,9 +1,8 @@
 package config
 
 import (
-	"log"
-
-	"github.com/spf13/viper"
+	"os"
+	"strconv"
 )
 
 type ServerConfig struct {
@@ -32,33 +31,31 @@ type Config struct {
 var Cfg *Config
 
 func init() {
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
-	viper.SetDefault("host", "localhost")
-	viper.SetDefault("port", 443)
-	viper.SetDefault("certFile", "cert.pem")
-	viper.SetDefault("keyFile", "key.pem")
-	err := viper.ReadInConfig()
+	serverConfig := ServerConfig {
+		Host: os.Getenv("WEBSERVER_HOST"),
+		Port: os.Getenv("WEBSERVER_PORT"),
+	}
+
+	db_port, err := strconv.Atoi(os.Getenv("DATABASE_PORT"))
 	if err != nil {
-		log.Fatalf("Configuration error: %v", err)
+		panic("Database port is not an integer")
+	}
+	databaseConfig := DatabaseConfig {
+		Host: os.Getenv("DATABASE_HOST"),
+		Port: db_port,
+		User: os.Getenv("DATABASE_USER"),
+		Password: os.Getenv("DATABASE_PASSWORD"),
+		Name: os.Getenv("DATABASE_NAME"),
+	}
+
+	tlsConfig := TlsConfig {
+		CertFile: os.Getenv("TLS_CERTFILE"),
+		KeyFile: os.Getenv("TLS_KEYFILE"),
 	}
 
 	Cfg = &Config{
-		Server: ServerConfig{
-			Host: viper.GetString("server.host"),
-			Port: viper.GetString("server.port"),
-		},
-		Tls: TlsConfig{
-			CertFile: viper.GetString("tls.certFile"),
-			KeyFile: viper.GetString("tls.keyFile"),
-		},
-		Database: DatabaseConfig{
-			Host: viper.GetString("database.host"),
-			Port: viper.GetInt("database.port"),
-			User: viper.GetString("database.user"),
-			Password: viper.GetString("database.password"),
-			Name: viper.GetString("database.name"),
-		},
+		Server: serverConfig,
+		Tls: tlsConfig,
+		Database: databaseConfig,
 	}
 }
